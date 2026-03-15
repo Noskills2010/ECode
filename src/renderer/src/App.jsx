@@ -3,20 +3,16 @@ import './stylesheets/App.css'
 
 export default function App() {
   return (
-    <>
-      <div id={'App'}>
-        <div id={'sidebar'}>Sidebar</div>
-        <div id={'right-editor'}>
-          <div id={'editor'}>
-            {/*missing TabBar TODO add TabBar*/}
-            <Monaco></Monaco>
-          </div>
-          <div id={'bottom'}>
-            <div id={'terminal'}>terminal</div>
-            <div id={'statusBar'}>statusbar</div>
-          </div>
+    <div id="app">
+      <div id="main">
+        <div id="sidebar">Sidebar</div>
+        <div id="editor-area">
+          <div id="tabs">aaaa{/* TODO: TabBar */}</div>
+          <Monaco/>
         </div>
       </div>
-    </>
+      <div id="terminal">Terminal</div>
+      <div id="statusbar">Statusbar</div>
+    </div>
   )
 }

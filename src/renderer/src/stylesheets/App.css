@@ -1,3 +1,42 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
 #app {
   display: flex;
+  flex-direction: column;
+  background-color: #3e3e3e;
+  height: 100vh
+}
+#main {
+  display: flex;
+  flex: 1
+}
+#editor-area {
+  min-width: 0;
+  flex: 1
+}
+#sidebar {
+ width: 300px;
+  background-color: #1e1e1e;
+  padding: 10px;
+  border-radius: 10px;
+  margin: 5px;
+}
+
+#terminal {
+  background-color: #1e1e1e;
+  padding: 10px;
+  border-radius: 10px;
+  margin: 5px;
+  flex-shrink: 0;
+}
+
+#statusbar {
+  background-color: #1e1e1e;
+  height: 30px;
+  padding: 5px;
 }
