@@ -5,11 +5,13 @@ loader.config({ monaco })
 
 export default function Monaco() {
   return (
-    <Editor
-      height="90vh"
-      defaultLanguage="python"
-      defaultValue="# Schreib deinen Code hier..."
-      theme="vs-dark"
-    />
+    <div style={{ flex: 1, display: "flex", flexDirection: "column"}}>
+      <Editor
+        height="100%"
+        defaultLanguage="python"
+        defaultValue="# Schreib deinen Code hier..."
+        theme="vs-dark"
+      />
+    </div>
   )
 }

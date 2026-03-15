@@ -1,13 +1,14 @@
-import Monaco from './components/monaco'
-import './stylesheets/App.css'
+import Monaco from './monaco'
+import '../stylesheets/App.css'
+import Sidebar from './sidebar'
 
 export default function App() {
   return (
     <div id="app">
       <div id="main">
-        <div id="sidebar">Sidebar</div>
+        <Sidebar/>
         <div id="editor-area">
-          <div id="tabs">aaaa{/* TODO: TabBar */}</div>
+          <div id="tabs">Tabs{/* TODO: TabBar */}</div>
           <Monaco/>
         </div>
       </div>
