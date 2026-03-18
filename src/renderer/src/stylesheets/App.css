@@ -11,28 +11,38 @@
   background-color: #3e3e3e;
   height: 100vh;
   padding-top: 5px;
-  gap: 5px
+  gap: 5px;
+  min-height: 0;
+}
+#workspace {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+  margin: 0 5px;
+  height: 100%;
 }
 #main {
   display: flex;
   flex: 1;
   gap: 5px;
   overflow: hidden;
-  margin: 0 5px;
+  min-height: 0;
+  height: 100%;
 }
 #editor-area {
   display: flex;
   flex-direction: column;
   min-width: 0;
   flex: 1;
+  min-height: 0;
 }
 
 #terminal {
   background-color: #1e1e1e;
   padding: 10px;
   border-radius: 10px;
-  flex-shrink: 0;
-  margin: 0 5px 0 5px;
+  flex: 1;
+  min-height: 0;
 }
 
 #statusbar {
@@ -41,4 +51,31 @@
   padding: 5px;
   margin: 0;
   width: 100%;
+}
+
+.resize-handle {
+  width: 6px;
+  background-color: #2a2a2a;
+  border-radius: 6px;
+}
+
+.resize-handle-vertical {
+  height: 6px;
+  background-color: #2a2a2a;
+  border-radius: 6px;
+}
+
+.separator {
+  background-color: #2a2a2a;
+  width: 4px;
+  cursor: col-resize;
+  border: none;
+  color: #3e3e3e !important;
+}
+
+[data-orientation="vertical"] > .separator {
+  height: 4px;
+  cursor: row-resize;
+  border: none;
+  color: #3e3e3e !important;
 }
