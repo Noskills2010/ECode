@@ -21,7 +21,7 @@ export default function Monaco() {
           overflow: 'hidden',
           borderRadius: '10px'
         }}
-        id={"monaco-styling-div"}
+        id={'monaco-styling-div'}
       >
         <Editor
           height="100%"

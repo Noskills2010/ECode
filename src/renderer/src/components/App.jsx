@@ -1,7 +1,7 @@
 import Monaco from './monaco'
 import '../stylesheets/App.css'
 import Sidebar from './sidebar'
-import { Group, Panel, Separator } from 'react-resizable-panels'
+import { Group, Panel } from 'react-resizable-panels'
 
 export default function App() {
   return (
@@ -11,11 +11,10 @@ export default function App() {
           <Panel defaultSize={70} minSize={30} style={{ display: 'flex' }}>
             <div id="main">
               <Group orientation="horizontal" style={{ height: '100%' }}>
-                <Panel defaultSize={20} minSize={15} style={{ display: 'flex' }}>
+                <Panel defaultSize={20} minSize={'10%'} style={{ display: 'flex' }}>
                   <Sidebar />
                 </Panel>
-                <Separator className="resize-handle" />
-                <Panel minSize={40} style={{ display: 'flex', flexDirection: 'column' }}>
+                <Panel minSize={'15%'} style={{ display: 'flex', flexDirection: 'column' }}>
                   <div id="editor-area">
                     <div id="tabs">Tabs</div>
                     <Monaco />
@@ -24,8 +23,7 @@ export default function App() {
               </Group>
             </div>
           </Panel>
-          <Separator className="resize-handle-vertical" />
-          <Panel defaultSize={30} minSize={15} style={{ display: 'flex' }}>
+          <Panel defaultSize={30} minSize={'5%'} maxSize={'95%'} style={{ display: 'flex' }}>
             <div id="terminal">Terminal</div>
           </Panel>
         </Group>

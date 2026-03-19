@@ -1,3 +1,18 @@
+const files = [
+  {
+    name: 'src',
+    type: 'folder',
+    children: [
+      { name: 'main.py', type: 'file' },
+      { name: 'utils.py', type: 'file' },
+      { name: 'ast.py', type: 'file' }
+    ]
+  },
+  { name: 'README.md', type: 'file' },
+  { name: 'hello.js', type: 'file' }
+]
+
+
 export default function Sidebar() {
   return (
     <div
@@ -11,7 +26,13 @@ export default function Sidebar() {
         overflowY: 'auto'
       }}
     >
-      Sidebar
+      {files.map((file) =>
+        file.type === 'folder' ? (
+          <div key={file.name}>📁 {file.name}</div>
+        ) : (
+          <div key={file.name}>📄 {file.name}</div>
+        )
+      )}
     </div>
   )
 }
