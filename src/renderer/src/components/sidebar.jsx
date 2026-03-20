@@ -1,17 +1,75 @@
-const files = [
+import FileTreeItemFolder from './FileTreeItemFolder';
+import FileTreeItemFile from './FileTreeItemFile';
+import { useState } from 'react'
+
+const isValidName = (name, childrenNames) => {
+  if (name.includes('.')) {
+    if (!childrenNames.filter((i) => i === name).length > 1) {
+      return true
+    } else {
+      return false
+    }
+  } else {
+    if (!childrenNames.filter((i) => i === name).length > 1) {
+      return true
+    } else {
+      return false
+    }
+  }
+}
+
+
+const iterStructure = (obj) => {
+  let fileTree = obj.map((item) => {
+    if (item.type === "Folder") {
+
+      return <FileTreeItemFolder name={item.name}>{iterStructure(item.children)}</FileTreeItemFolder>
+    }
+    else {
+      return <FileTreeItemFile name={item.name}/>
+    }
+  })
+  return fileTree;
+};
+
+let fileTree = iterStructure([
   {
     name: 'src',
-    type: 'folder',
+    type: 'Folder',
     children: [
-      { name: 'main.py', type: 'file' },
-      { name: 'utils.py', type: 'file' },
-      { name: 'ast.py', type: 'file' }
+      {
+        name: 'main.py',
+        type: 'File'
+      },
+      {
+        name: 'utils',
+        type: 'Folder',
+        children: [
+          { name: 'helper.py', type: 'File' },
+          { name: 'math.py', type: 'File' }
+        ]
+      },
+      {
+        name: 'models',
+        type: 'Folder',
+        children: [
+          { name: 'user.py', type: 'File' },
+          { name: 'post.py', type: 'File' }
+        ]
+      }
     ]
   },
-  { name: 'README.md', type: 'file' },
-  { name: 'hello.js', type: 'file' }
-]
-
+  {
+    name: 'tests',
+    type: 'Folder',
+    children: [
+      { name: 'test_main.py', type: 'File' },
+      { name: 'test_utils.py', type: 'File' }
+    ]
+  },
+  { name: 'README.md', type: 'File' },
+  { name: 'requirements.txt', type: 'File' }
+])
 
 export default function Sidebar() {
   return (
@@ -26,13 +84,7 @@ export default function Sidebar() {
         overflowY: 'auto'
       }}
     >
-      {files.map((file) =>
-        file.type === 'folder' ? (
-          <div key={file.name}>📁 {file.name}</div>
-        ) : (
-          <div key={file.name}>📄 {file.name}</div>
-        )
-      )}
+      <div>{fileTree}</div>
     </div>
   )
 }
