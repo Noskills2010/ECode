@@ -1,6 +1,7 @@
-import { app, shell, BrowserWindow } from 'electron'
+import { app, shell, BrowserWindow, ipcMain } from 'electron'
 import { join } from 'path'
 import { electronApp, optimizer, is } from '@electron-toolkit/utils'
+import { watchDir } from './sidebar'
 
 function createWindow() {
   const mainWindow = new BrowserWindow({
@@ -28,16 +29,21 @@ function createWindow() {
   } else {
     mainWindow.loadFile(join(__dirname, '../renderer/index.html'))
   }
+  return mainWindow
 }
-
+let mainWindow;
 app.whenReady().then(() => {
   electronApp.setAppUserModelId('com.electron')
+
+  ipcMain.on('sidebarSendFiles', (event, data) => {
+    watchDir(data, mainWindow)
+  })
 
   app.on('browser-window-created', (_, window) => {
     optimizer.watchWindowShortcuts(window)
   })
 
-  createWindow()
+  let mainWindow = createWindow()
 
   app.on('activate', function () {
     if (BrowserWindow.getAllWindows().length === 0) createWindow()
@@ -48,4 +54,6 @@ app.on('window-all-closed', () => {
   if (process.platform !== 'darwin') {
     app.quit()
   }
+
 })
+

@@ -1,8 +1,11 @@
-import { contextBridge } from 'electron'
+import { contextBridge, ipcRenderer } from 'electron'
 import { electronAPI } from '@electron-toolkit/preload'
-
 const api = {
-
+  sendDirectory: (data) => ipcRenderer.send('sidebarSendFiles', data),
+  getDirectory: (callback) => ipcRenderer.on('sidebarGetFiles', (event, data) => {
+    console.log(data);
+    callback(data)
+  })
 }
 
 
