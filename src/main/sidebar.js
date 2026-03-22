@@ -50,7 +50,7 @@ const insertFile = (parts, tree) => {
     tree.push({ name: parts[0], type: 'File' })
   } else {
     const parent = getParent(parts[parts.length - 2], tree)
-    if (parent) {
+    if (parent && parent.type === "Folder") {
       parent.children.push({ name: parts[parts.length - 1], type: 'File' })
     }
   }
@@ -70,15 +70,16 @@ export const watchDir = (WatchPath, mainWindow) => {
         if (event === 'addDir') {
           if (!tree.find((item) => item.name === path[0])) {
             if (parts.length === 1) {
-              tree.push({ name: parts[0], type: 'Folder', children: [] })
+              tree.push({ name: parts[0], type: 'Folder', children: [], path: path })
             }
             if (parts.length > 1) {
               const parent = getParent(parts[parts.length - 2], tree)
-              if (parent) {
+              if (parent && parent.type === "Folder") {
                 parent.children.push({
                   name: parts[parts.length - 1],
                   type: 'Folder',
-                  children: []
+                  children: [],
+                  path: path
                 })
               }
             }
@@ -98,7 +99,8 @@ export const watchDir = (WatchPath, mainWindow) => {
       }
     })
     .on('ready', () => {
-      // for debug reasons: console.log('ready', pendingFiles)
+      // for debug reasons:
+      console.log('ready', pendingFiles)
       isReady = true // ← ab jetzt direkt einfügen
 
       pendingFiles.forEach((item) => {
@@ -108,7 +110,8 @@ export const watchDir = (WatchPath, mainWindow) => {
 
       sortTree(tree)
 
-      // for debug reasons: console.log(JSON.stringify(tree, null, 2))
+      // for debug reasons:
+      console.log(JSON.stringify(tree, null, 2))
       mainWindow.webContents.send('sidebarGetFiles', tree)
     })
     .on('unlink', (path) => {

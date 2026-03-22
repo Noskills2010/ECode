@@ -26,7 +26,7 @@ export default function Monaco() {
         <Editor
           height="100%"
           defaultLanguage="python"
-          defaultValue="# Schreib deinen Code hier..."
+          defaultValue="# Schreib deinen Code hier... (any further functionality will be implemented later)"
           theme="vs-dark"
         />
       </div>

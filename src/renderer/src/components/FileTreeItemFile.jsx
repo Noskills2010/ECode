@@ -1,5 +1,17 @@
 //import { useState } from 'react'
 
-export default function FileTreeItemFile({ name }) {
-  return <div style={{ cursor: 'default' }}>📄 {name}</div>
+export default function FileTreeItemFile({ name, onContextMenu }) {
+  return (
+    <div
+      style={{
+        cursor: 'default',
+        textOverflow: 'hidden',
+        whiteSpace: 'nowrap',
+        overflow: 'hidden'
+      }}
+      onContextMenu={onContextMenu}
+    >
+      📄 {name}
+    </div>
+  )
 }
